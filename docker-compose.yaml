@@ -1,0 +1,24 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
+################################################################################
+version: "3.7"
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Kiev
+    ports:
+      - "1880:1880"
+      - "5555:5555/udp"
+    networks:
+      - node-red-net
+    volumes:
+      - ./data:/data
+      - ./:/workspace
+
+networks:
+  node-red-net:
