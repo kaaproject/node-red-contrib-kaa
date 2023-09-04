@@ -1,6 +1,6 @@
 {
   "name": "@kaa/node-red-contrib-kaa",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Kaa Node Read Integratiom",
   "main": "index.js",
   "scripts": {

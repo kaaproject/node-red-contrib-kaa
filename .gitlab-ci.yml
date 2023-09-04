@@ -1,11 +1,21 @@
 image: node:latest
 
+include:
+  - project: 'devops/gitlab-ci-templates'
+    file: '/.create_version_tag.yml'
+  - project: 'devops/gitlab-ci-templates'
+    file: '/.get_build_version.yml'
+
 stages:
+  - create_version_tag
+  - get_build_version
   - deploy
 
 deploy:
   stage: deploy
   script:
+    - export VERSION=$(cat current_version)
+    - sed -i "s/0.0.0/${VERSION}/" package.json
     - npm publish
   tags:
     - kubernetes
