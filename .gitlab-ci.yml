@@ -7,4 +7,6 @@ deploy:
   stage: deploy
   script:
     - npm publish
+  tags:
+    - kubernetes
 
