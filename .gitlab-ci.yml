@@ -13,6 +13,13 @@ stages:
 
 deploy:
   stage: deploy
+  except:
+    - tags
+    - schedules
+    - triggers
+  only:
+    - master
+    - /^rel_.*$/
   script:
     - export VERSION=$(cat current_version)
     - sed -i "s/0.0.0/${VERSION}/" package.json
