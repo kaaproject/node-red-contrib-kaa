@@ -14,11 +14,23 @@ services:
     ports:
       - "1880:1880"
       - "5555:5555/udp"
+      - "4444:4444"
     networks:
       - node-red-net
     volumes:
       - ./data:/data
       - ./:/workspace
+
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883" #default mqtt port
+      - "9001:9001" #default mqtt port for websockets
+    volumes:
+      - ./mqtt-data/config:/mosquitto/config:rw
+      - ./mqtt-data/data:/mosquitto/data:rw
+      - ./mqtt-data/log:/mosquitto/log:rw
 
 networks:
   node-red-net:

@@ -1,12 +1,15 @@
 var ConnectorFactory = require("./kaa/connectors.js");
 var teltonika = require("./kaa/teltonika.js");
-var token = "test123";
 
-testHTTP();
-// testMQTT();
+var token = "test123";
+var application = "cjjfbjgheq5g58bk4gdg";
+var domain = "dev.kaatech.com";
+
+// testHTTP();
+testMQTT();
 
 function testHTTP() {
-  var connector = ConnectorFactory.create(type = "HTTP", domain = "dev.kaatech.com", application = "cjjfbjgheq5g58bk4gdg", version = "v1")
+  var connector = ConnectorFactory.create(type = "HTTP", domain = domain, application = application, version = "v1", client_id = "test_pmyko")
   console.log(connector)
   connector.sendMeta({ x: "1"}, token)
   // connector.publishData([{ x: "1"}])
@@ -27,7 +30,7 @@ function testHTTP() {
 }
 
 function testMQTT() {
-  var connector = ConnectorFactory.create(type = "MQTT", domain = "dev.kaatech.com", application = "cjjfbjgheq5g58bk4gdg", version = "v1")
+  var connector = ConnectorFactory.create(type = "MQTT", domain = domain, application = application, version = "v1", client_id = "test_pmyko")
   console.log(connector)
 
   const connectCallback = () => {
@@ -44,6 +47,25 @@ function testMQTT() {
   };
 
   connector.connect(connectCallback, connectionLostCallback);
+
+
+  setTimeout(function() {
+    const subscriptionId = connector.subscribeToCommand("ping", token, command => {
+      console.log(command.payload);
+      connector.sendCommandResponse(token, { 
+        id: command.id,
+        command: command.name,
+        statusCode: 200,
+        payload: { xxx: "zzz" }
+      });
+    });
+
+    console.log("subscriptionId = " + subscriptionId);
+
+    // connector.unsubscribeFromCommand(subscriptionId);
+
+  }, 1000);
+
 
   setTimeout(function() {
     connector.sendMeta({ x: "2"}, token);

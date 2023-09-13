@@ -6,7 +6,8 @@
           connection_type: { value: "HTTP", required: true },
           domain: { value: "dev.kaatech.com", required: true },
           application: { value: "", required: true },
-          version: { value: "", required: true }
+          version: { value: "", required: true },
+          client_id: { value: "", required: true }
       },
       inputs: 1,
       outputs: 1,
@@ -37,6 +38,10 @@
       <label for="node-input-version"><i class="icon-tag"></i>Application Version</label>
       <input type="text" id="node-input-version" placeholder="Version">
   </div>
+  <div class="form-row">
+    <label for="node-input-version"><i class="icon-tag"></i>Client ID</label>
+    <input type="text" id="node-input-client_id" placeholder="Client ID">
+</div>
 </script>
 
 <script type="text/html" data-help-name="kaa-connector">

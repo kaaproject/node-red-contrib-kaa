@@ -3,8 +3,8 @@ const https = require("https");
 
 class HTTPConnector extends Connector {
     
-    constructor(domain, application, version) {
-        super(domain, application, version)
+    constructor(domain, application, version, client_id) {
+        super(domain, application, version, client_id)
         this.url = "connect." + domain;
     }
 

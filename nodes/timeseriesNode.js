@@ -3,13 +3,8 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.on('input', function(msg) {
-            var newMsg = {
-                action: "ts",
-                payload: msg.payload,
-                token: msg.token
-            };
-
-            node.send(newMsg);
+            msg.action = "ts";
+            node.send(msg);
         });
     }
     RED.nodes.registerType("kaa-timeseries", KaaTimeseriesNode);

@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  RED.nodes.registerType('kaa-command-subscription',{
+      category: 'Kaa',
+      color: '#a6bbcf',
+      defaults: {
+        command: { value: "", required: true },
+        auto_reply: { value: false, required: false },
+        auto_reply_message: { value: "command will be executed", required: false }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.png",
+      label: function() {
+          return "Kaa Command Subscription: " + this.command;
+      },
+      oneditprepare: function() {
+        var updateOptions = function() {
+          if ($("#node-input-auto_reply").is(':checked')) {
+            $("#node-input-auto_reply_message-row").show();
+          } else {
+            $("#node-input-auto_reply_message-row").hide();
+          }
+        };
+        updateOptions();
+        $("#node-input-auto_reply").change(updateOptions);
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="kaa-command-subscription">
+  <div class="form-row">
+    <label for="node-input-command"><i class="icon-tag"></i>Command</label>
+    <input type="text" id="node-input-command" placeholder="command">
+  </div>
+  <div class="form-row">
+    <label for="node-input-auto_reply"><i class="icon-tag"></i>Auto Reply</label>
+    <input type="checkbox" id="node-input-auto_reply" style="display: inline-block; width:auto; vertical-align:top;">
+  </div>
+  <div id="node-input-auto_reply_message-row" class="form-row hidden">
+    <label for="node-input-auto_reply_message"><i class="icon-tag"></i>Auto Reply Message</label>
+    <input type="text" id="node-input-auto_reply_message" placeholder="Message">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="kaa-command-subscription">
+  <p>Kaa Command Subscription</p>
+</script>
