@@ -40,19 +40,30 @@ module.exports = function(RED) {
                         }
                         for (let msg of message) {
                             const newMsg = Object.assign({}, mapping[token]);
+
                             newMsg.commandId = msg.id;
                             newMsg.command = tmp[5];
                             newMsg.token = token;
                             newMsg.payload = msg.payload;
+
                             delete newMsg.action;
                             delete newMsg._msgid;
+                            delete newMsg.statusCode;
+                            delete newMsg.reasonPhrase;
+
                             node.send(newMsg);
                         }
                     } else {
-                        node.warn(`Got CEX message for unregistered token [${token}]`);
+                        node.error(`Got CEX message for unregistered token [${token}]`);
                     }
                 }
             });
+
+
+            for (var token in mapping) {
+                node.log(`publish observer for ping and token [${token}]`);
+                node.connector.observeCommand("ping", token);
+            }
         };
     
         const connectionLostCallback = (error) => {

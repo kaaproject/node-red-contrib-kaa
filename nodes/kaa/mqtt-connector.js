@@ -128,9 +128,17 @@ class MQTTConnector extends Connector {
         };
     }
 
+    observeCommand(command, token) {
+        const topic = `kp1/${this.application}-${this.version}/cex/${token}/command/${command}`;
+
+        this.client.publish(topic, JSON.stringify({
+            observe: true
+        }));
+    }
+
+
     sendCommandResponse(token, response) {
         const topic = `kp1/${this.application}-${this.version}/cex/${token}/result/${response.command}`;
-        console.log(`Publishing to topic [${topic}]`);
 
         this.client.publish(topic, JSON.stringify([{
             id: response.id,
