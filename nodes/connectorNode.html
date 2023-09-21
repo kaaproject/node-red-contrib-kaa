@@ -3,8 +3,8 @@
       category: 'Kaa',
       color: '#34A5FF',
       defaults: {
-          connection_type: { value: "HTTP", required: true },
-          domain: { value: "dev.kaatech.com", required: true },
+          connection_type: { value: "MQTT", required: true },
+          domain: { value: "cloud.kaaiot.com", required: true },
           application: { value: "", required: true },
           version: { value: "", required: true },
           client_id: { value: "", required: true }
@@ -22,7 +22,6 @@
   <div class="form-row">
       <label for="node-input-connection_type"><i class="fa fa-tag"></i> Type</label>
       <select id="node-input-connection_type" placeholder="Connector Type">
-        <option value="HTTP">HTTP</option>
         <option value="MQTT">MQTT</option>
       </select>
   </div>
@@ -45,5 +44,5 @@
 </script>
 
 <script type="text/html" data-help-name="kaa-connector">
-  <p>Kaa Connector</p>
+  <p>Connector. Manages mqtt connection to KAA Platform</p>
 </script>
