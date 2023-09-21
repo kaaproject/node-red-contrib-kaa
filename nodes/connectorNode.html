@@ -1,7 +1,7 @@
 <script type="text/javascript">
   RED.nodes.registerType('kaa-connector',{
       category: 'Kaa',
-      color: '#a6bbcf',
+      color: '#34A5FF',
       defaults: {
           connection_type: { value: "HTTP", required: true },
           domain: { value: "dev.kaatech.com", required: true },
@@ -11,7 +11,7 @@
       },
       inputs: 1,
       outputs: 1,
-      icon: "file.png",
+      icon: "connector.svg",
       label: function() {
           return "Kaa " + this.connection_type + " Connector";
       }
