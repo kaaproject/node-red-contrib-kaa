@@ -8,14 +8,19 @@ class MQTTConnector extends Connector {
         this.url = "mqtt://mqtt." + domain + ":1883";
 
         this.connecting = false;
-        this.reconnectCounter = 0;
+        this.connected = false;
 
         this.commandSubscription = undefined;
         this.subscription = undefined;
     }
 
     connect(connectCallback, connectionLostCallback) {
+        if (this.connected || this.connecting) {
+            return;
+        }
+
         this.connecting = true;
+        this.disconnect();
 
         const clientId = this.client_id;
         this.client = mqtt.connect(this.url, {
@@ -27,26 +32,22 @@ class MQTTConnector extends Connector {
         
         this.client.on("connect", () => {
             this.connecting = false;
-            this.reconnectCounter = 0;
+            this.connected = true;
             connectCallback();
         });
 
         this.client.on("error", (error) => {
             this.connecting = false;
-            try {
-                let waittime = Math.min((this.reconnectCounter + 1) * 1000, 30000);
-                setTimeout(() => {
-                    connectionLostCallback(error);
-                }, waittime);
-        
-                this.reconnectCounter += 1;
-              } catch (e) {
-                console.error("error: " + e);
-              }
+            this.connected = false;
+            connectionLostCallback(error);
+        });
+
+        this.client.on("close", () => {
+            this.connecting = false;
+            this.connected = false;
         });
 
         this.client.on('message', (topic, message) => {
-            // console.log(`Message received: topic [${topic}] body [${message}]`);
 
             if (this.subscription) {
                 this.subscription(topic, message);
@@ -149,7 +150,6 @@ class MQTTConnector extends Connector {
     }
 
     disconnect() {
-        console.info("disconnect mqtt client");
         if (this.client != undefined) {
             try {
                 this.client.end(true);
