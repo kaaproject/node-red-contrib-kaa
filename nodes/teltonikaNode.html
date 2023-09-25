@@ -2,18 +2,25 @@
     RED.nodes.registerType('kaa-teltonika',{
         category: 'Kaa',
         color: '#34A5FF',
-        defaults: {},
+        defaults: {
+          codec: { value: "Codec_8_Extended", required: true }
+        },
         inputs: 1,
         outputs: 1,
         icon: "teltonika.svg",
         label: function() {
-            return "Kaa Teltonika";
+            return "Kaa Teltonika: " + this.codec;
         }
     });
   </script>
   
   <script type="text/html" data-template-name="kaa-teltonika">
-    <div />
+    <div class="form-row">
+      <label for="node-input-codec"><i class="fa fa-tag"></i> Type</label>
+      <select id="node-input-codec" placeholder="Codec">
+        <option value="Codec_8_Extended">Codec_8_Extended</option>
+      </select>
+    </div>
   </script>
   
   <script type="text/html" data-help-name="kaa-teltonika">
