@@ -22,7 +22,7 @@ deploy:
     - /^rel_.*$/
   script:
     - export VERSION=$(cat current_version)
-    - sed -i "s/0.0.0/${VERSION}/" package.json
+    - npm version "${VERSION}" --no-git-tag-version
     - npm publish
   tags:
     - kubernetes
