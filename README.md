@@ -1,6 +1,6 @@
 # node-red-contrib-kaa
 
-This Node-RED node library, `@kaa/node-red-contrib-kaa`, facilitates integration with the [Kaa IoT platform](https://www.kaaiot.com/), allowing Node-RED to leverage a variety of Kaa functionalities. While these nodes form an integral part of the [dedicated Kaa hosted Node-RED instance](https://www.kaaiot.com/products/nodered-hosting-plan), they are also designed for independent use.
+This Node-RED node library, `@kaaiot/node-red-contrib-kaa`, facilitates integration with the [Kaa IoT platform](https://www.kaaiot.com/), allowing Node-RED to leverage a variety of Kaa functionalities. While these nodes form an integral part of the [dedicated Kaa hosted Node-RED instance](https://www.kaaiot.com/products/nodered-hosting-plan), they are also designed for independent use.
 
 ## Nodes
 
@@ -17,7 +17,7 @@ The package includes the following nodes:
 To install this node library, run the following command in your Node-RED environment:
 
 ```bash
-npm install @kaa/node-red-contrib-kaa
+npm install @kaaiot/node-red-contrib-kaa
 ```
 
 Ensure that you have Node-RED already installed and running before adding this package.
