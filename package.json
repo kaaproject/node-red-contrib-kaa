@@ -1,14 +1,21 @@
 {
   "name": "@kaa/node-red-contrib-kaa",
-  "version": "0.0.0",
-  "description": "Kaa Node Read Integratiom",
+  "version": "1.0.0",
+  "description": "Kaa Node RED Integration",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaaproject/node-red-contrib-kaa.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node-red",
-    "nodered"
+    "nodered",
+    "mqtt",
+    "iot",
+    "kaa"
   ],
   "node-red": {
     "nodes": {
@@ -20,7 +27,7 @@
       "kaa-teltonika": "nodes/teltonikaNode.js"
     }
   },
-  "author": "Kaa",
+  "author": "kaa-team@kaaiot.io",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
