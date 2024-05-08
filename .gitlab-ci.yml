@@ -23,6 +23,7 @@ deploy:
   script:
     - export VERSION=$(cat current_version)
     - npm version "${VERSION}" --no-git-tag-version
+    - sed -i 's/@kaaiot\/node-red-contrib-kaa/@kaa\/node-red-contrib-kaa/' package.json
     - npm publish
   tags:
     - kubernetes
